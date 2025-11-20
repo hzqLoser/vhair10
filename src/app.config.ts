@@ -1,5 +1,7 @@
 
 export default {
+  // 确保 H5 默认跳转到首页
+  entryPagePath: 'pages/home/index',
   pages: [
     'pages/home/index',
     'pages/square/index',
