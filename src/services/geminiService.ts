@@ -50,10 +50,10 @@ export const generateHairstyleAI = async ({ originalImageBase64, hairstyleDescri
     // Parse response
     const parts = response.candidates?.[0]?.content?.parts;
     if (parts && parts.length > 0) {
-        const part = parts[0];
-        if (part.inlineData && part.inlineData.data) {
-            return `data:image/png;base64,${part.inlineData.data}`;
-        }
+      const part = parts[0];
+      if (part.inlineData && part.inlineData.data) {
+        return `data:image/png;base64,${part.inlineData.data}`;
+      }
     }
     
     throw new Error("No image data in response");
