@@ -44,7 +44,7 @@ const Home = () => {
         onRefresh={refresh}
       />
 
-      <View className={styles.grid}>
+      <View className={styles.gridSection}>
         {loading && (
           <View className="py-10">
             <LoadingSpinner />
@@ -127,7 +127,7 @@ interface HairstyleGridProps {
 }
 
 const HairstyleGrid: React.FC<HairstyleGridProps> = ({ hairstyles, onSelect }) => (
-  <View className={styles.grid}>
+  <View className={styles.gridList}>
     {hairstyles.map(style => (
       <View key={style.id} onClick={() => onSelect(style)} className={styles.card}>
         <Image src={style.imageUrl} className={styles.cardImage} mode="aspectFill" />

@@ -1,5 +1,5 @@
 export default definePageConfig({
-  navigationBarTitleText: '广场',
+  navigationBarTitleText: '试戴记录',
   navigationStyle: 'custom',
   backgroundColor: '#f7f7f7',
 });
