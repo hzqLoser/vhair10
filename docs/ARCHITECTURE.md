@@ -23,9 +23,10 @@
 - `src/services/geminiService.ts`
   - 对 Gemini 生成接口的轻量封装，保持 UI 调用签名稳定，日后迁移到服务端只需更换实现。
 
-- `src/pages/home/index.tsx`
-  - 首页拆分为 `HeroBanner` / `FilterPanel` / `HairstyleGrid` 三个部分，逻辑与渲染分离。
-  - 加入详细注释，说明数据流和交互入口，便于扩展新的版块。
+- `src/pages/home/`
+  - `index.tsx`：页面主组件，拆分为 `HeroBanner` / `FilterPanel` / `HairstyleGrid` 三个部分，逻辑与渲染分离。
+  - `index.module.scss`：本页专属样式，使用 Tailwind 的 `@apply` 让类名保持语义化；避免在 TSX 中堆叠样式字符串。
+  - `index.config.ts`：Taro 页面配置（导航栏标题、背景色等）。每个页面建议同样放置一个 config 文件，方便独立调整页面级设置。
 
 - `src/components/ui.tsx`
   - 常用按钮、标签、分段控件与导航栏的轻量实现，集中控制配色与圆角风格。
@@ -33,7 +34,7 @@
 ## 扩展建议
 
 1. **接入真实接口**：在 `api.ts` 中替换对应方法的实现即可，`useAsyncRequest` 会自动接管 loading/error 状态。
-2. **新增页面或版块**：直接使用 `src/utils/taro.tsx` 导出的组件和 Tailwind 工具类，保持样式一致。
+2. **新增页面或版块**：直接使用 `src/utils/taro.tsx` 导出的组件和 Tailwind 工具类，保持样式一致。为新页面新增 `index.module.scss` 与 `index.config.ts`，让样式和配置就近维护。
 3. **复用布局**：将常用区块拆成独立小组件（如本次的 `HeroBanner`、`FilterPanel`），避免单文件过大。
 
 希望这些改动能帮助你快速理解项目结构并自信地做二次开发。

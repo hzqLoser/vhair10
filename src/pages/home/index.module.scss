@@ -1,0 +1,82 @@
+.homePage {
+  @apply flex flex-col min-h-screen bg-gray-100 pb-5;
+}
+
+.heroBanner {
+  @apply relative h-60 p-6 pt-12 rounded-b-3xl shadow-lg;
+  background: linear-gradient(to bottom right, #ff8a00, #ff3d81);
+}
+
+.heroContent {
+  @apply text-center mt-8;
+}
+
+.heroTitle {
+  @apply text-2xl font-bold text-white block mb-1;
+}
+
+.heroSubtitle {
+  @apply text-white text-sm block mb-6 opacity-80;
+}
+
+.heroButton {
+  @apply inline-block bg-white text-pink-500 px-8 py-3 rounded-full font-bold shadow-md;
+  color: #ff3d81;
+}
+
+.filterCard {
+  @apply bg-white -mt-8 mx-4 rounded-xl p-3 shadow-sm mb-4 relative z-10;
+}
+
+.genderTabs {
+  @apply flex mb-2 bg-gray-100 rounded p-1;
+}
+
+.genderTab {
+  @apply flex-1 text-center py-1 text-gray-500;
+}
+
+.genderTabActive {
+  @apply bg-white text-pink-500 shadow;
+}
+
+.categoryRow {
+  @apply flex flex-row whitespace-nowrap;
+}
+
+.categoryPill {
+  @apply px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600;
+}
+
+.categoryPillActive {
+  @apply bg-pink-500 text-white;
+}
+
+.refreshLink {
+  @apply text-right text-xs text-gray-400 mt-1;
+}
+
+.grid {
+  @apply flex flex-wrap justify-between px-4;
+}
+
+.card {
+  @apply bg-white rounded-xl overflow-hidden shadow-sm mb-2;
+  width: 31%;
+}
+
+.cardImage {
+  @apply w-full h-24 object-cover;
+}
+
+.cardBody {
+  @apply p-2;
+}
+
+.cardHeat {
+  @apply flex items-center mb-1 text-xs text-orange-400;
+}
+
+.cardName {
+  @apply font-bold text-xs block truncate;
+}
