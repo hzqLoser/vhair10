@@ -1,0 +1,60 @@
+{
+  "name": "hairmatch-ai-taro",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HairMatch AI Taro Version",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "sass"
+  },
+  "scripts": {
+    "build:weapp": "taro build --type weapp",
+    "build:swan": "taro build --type swan",
+    "build:alipay": "taro build --type alipay",
+    "build:tt": "taro build --type tt",
+    "build:h5": "taro build --type h5",
+    "build:rn": "taro build --type rn",
+    "dev:weapp": "npm run build:weapp -- --watch",
+    "dev:swan": "npm run build:swan -- --watch",
+    "dev:alipay": "npm run build:alipay -- --watch",
+    "dev:tt": "npm run build:tt -- --watch",
+    "dev:h5": "npm run build:h5 -- --watch",
+    "dev:rn": "npm run build:rn -- --watch"
+  },
+  "browserslist": [
+    "last 3 versions",
+    "Android >= 4.1",
+    "ios >= 8"
+  ],
+  "author": "",
+  "dependencies": {
+    "@babel/runtime": "^7.20.0",
+    "@tarojs/components": "4.0.7",
+    "@tarojs/helper": "4.0.7",
+    "@tarojs/plugin-framework-react": "4.0.7",
+    "@tarojs/plugin-platform-weapp": "4.0.7",
+    "@tarojs/plugin-platform-h5": "4.0.7",
+    "@tarojs/react": "4.0.7",
+    "@tarojs/runtime": "4.0.7",
+    "@tarojs/shared": "4.0.7",
+    "@tarojs/taro": "4.0.7",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "lucide-react": "latest",
+    "@google/genai": "^0.1.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@tarojs/cli": "4.0.7",
+    "@tarojs/webpack5-runner": "4.0.7",
+    "@types/react": "^18.0.0",
+    "@types/webpack-env": "^1.13.6",
+    "@types/node": "^18.0.0",
+    "babel-preset-taro": "4.0.7",
+    "typescript": "^5.0.0",
+    "webpack": "^5.0.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}

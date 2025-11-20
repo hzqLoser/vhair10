@@ -1,0 +1,7 @@
+{
+  "name": "HairMatch AI",
+  "description": "A virtual hairstyle try-on app powered by Gemini Nano Banana. Upload a selfie and instantly see yourself with trending hairstyles.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}

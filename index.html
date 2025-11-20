@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>HairMatch AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#FF8A00',
+              secondary: '#FF3D81',
+              bg: '#F7F7F9',
+              card: '#FFFFFF',
+              textMain: '#1A1A1A',
+              textSub: '#858585',
+              textHint: '#B0B0B0',
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      }
+    </script>
+    <style>
+      /* Custom scrollbar hiding for clean mobile UI */
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      body {
+        background-color: #e5e5e5; /* Darker outer background for desktop view */
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+      }
+      #root {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "@tarojs/components": "https://aistudiocdn.com/@tarojs/components@^4.1.8",
+    "@tarojs/taro": "https://aistudiocdn.com/@tarojs/taro@^4.1.8",
+    "path": "https://aistudiocdn.com/path@^0.12.7",
+    "@tarojs/cli": "https://aistudiocdn.com/@tarojs/cli@^4.1.8"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
