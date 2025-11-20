@@ -1,115 +1,151 @@
-import React, { useState, useEffect } from 'react';
-import { View as TaroView, Text as TaroText, Image as TaroImage, ScrollView as TaroScrollView } from '@tarojs/components';
-import Taro, { useDidShow } from '@tarojs/taro';
-import { api } from '@/services/api';
-import { Hairstyle } from '@/types';
-import { LoadingSpinner } from '@/components/ui';
+import React, { useMemo, useState } from 'react'
+import Taro from '@tarojs/taro'
+import { api } from '@/services/api'
+import { Hairstyle, Gender } from '@/types'
+import { HOME_CATEGORY_MAP, HOME_FILTERS } from '@/constants/home'
+import { useAsyncRequest } from '@/hooks/useAsyncRequest'
+import { LoadingSpinner } from '@/components/ui'
+import { Image, ScrollView, Text, View } from '@/utils/taro'
 
-// Cast Taro components to any to avoid Vue/React type conflicts
-const View = TaroView as any;
-const Text = TaroText as any;
-const Image = TaroImage as any;
-const ScrollView = TaroScrollView as any;
+const heroGradient = 'linear-gradient(to bottom right, #FF8A00, #FF3D81)'
 
-// In Taro, pages are separate files. 
-// We use Taro.navigateTo instead of internal state routing.
-
+/**
+ * Feature entry for the home tab. The page is intentionally split into
+ * self-contained sub-components (hero, filters, grid) so new sections can be
+ * dropped in without growing one massive render function.
+ */
 const Home = () => {
-  const [hairstyles, setHairstyles] = useState<Hairstyle[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({ gender: 'Male', category: '全部' });
-  
-  const filterOptions = ['全部', '长发', '短发', '卷发', '直发', '染色'];
-  const categoryMap: {[key: string]: string} = {
-    '全部': 'all', '长发': 'long', '短发': 'short', '卷发': 'curly', '直发': 'straight', '染色': 'color'
-  };
+  const [gender, setGender] = useState<Gender>(Gender.Male)
+  const [category, setCategory] = useState<(typeof HOME_FILTERS)['categories'][number]>('全部')
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const data = await api.getHairstyles(filters.gender, categoryMap[filters.category]);
-        setHairstyles(data);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, [filters]);
+  const { data: hairstyles = [], loading, error, refresh } = useAsyncRequest(
+    () => api.getHairstyles(gender, HOME_CATEGORY_MAP[category]),
+    [gender, category],
+  )
+
+  const subtitle = useMemo(
+    () => `${gender === Gender.Female ? '女性' : '男性'} · ${category === '全部' ? '所有风格' : category}`,
+    [category, gender],
+  )
 
   const goDetail = (style: Hairstyle) => {
-    // Pass data via encoded URL params or event channel
-    Taro.navigateTo({
-      url: `/pages/hairstyleDetail/index?data=${encodeURIComponent(JSON.stringify(style))}`
-    });
-  };
+    Taro.navigateTo({ url: `/pages/hairstyleDetail/index?data=${encodeURIComponent(JSON.stringify(style))}` })
+  }
 
-  const goTryOn = () => {
-    Taro.navigateTo({ url: '/pages/tryOnEntry/index' });
-  };
+  const goTryOn = () => Taro.navigateTo({ url: '/pages/tryOnEntry/index' })
 
   return (
-    <View className="flex flex-col h-full bg-gray-100 min-h-screen pb-5">
-      {/* Hero */}
-      <View className="relative h-60 bg-gradient-to-br from-orange-500 to-pink-500 p-6 pt-12 rounded-b-3xl shadow-lg" style={{ background: 'linear-gradient(to bottom right, #FF8A00, #FF3D81)' }}>
-        <View className="text-center mt-8">
-          <Text className="text-2xl font-bold text-white block mb-1">AI 智能匹配发型</Text>
-          <Text className="text-white text-sm block mb-6 opacity-80">上传自拍，一键虚拟换发</Text>
-          <View 
-            onClick={goTryOn}
-            className="bg-white text-pink-500 px-8 py-3 rounded-full font-bold shadow-md inline-block"
-            style={{ backgroundColor: 'white', color: '#FF3D81', padding: '12px 32px', borderRadius: '999px', display: 'inline-block' }}
-          >
-            立即试戴
-          </View>
-        </View>
-      </View>
+    <View className="flex flex-col min-h-screen bg-gray-100 pb-5">
+      <HeroBanner onTryOn={goTryOn} subtitle={subtitle} />
+      <FilterPanel
+        gender={gender}
+        category={category}
+        onGenderChange={setGender}
+        onCategoryChange={setCategory}
+        onRefresh={refresh}
+      />
 
-      {/* Filters */}
-      <View className="bg-white -mt-8 mx-4 rounded-xl p-3 shadow-sm mb-4 relative z-10">
-        <View className="flex mb-2 bg-gray-100 rounded p-1">
-          {['Male', 'Female'].map(g => (
-             <View key={g} onClick={() => setFilters({...filters, gender: g})} className={`flex-1 text-center py-1 ${filters.gender === g ? 'bg-white text-pink-500 shadow' : 'text-gray-500'}`}>
-               {g}
-             </View>
-          ))}
-        </View>
-        <ScrollView scrollX className="whitespace-nowrap">
-          <View className="flex flex-row">
-          {filterOptions.map(f => (
-            <View 
-              key={f} 
-              onClick={() => setFilters({...filters, category: f})}
-              className={`px-3 py-1 rounded-full text-xs mr-2 inline-block ${filters.category === f ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-600'}`}
-              style={{ backgroundColor: filters.category === f ? '#FF3D81' : '#f3f4f6', color: filters.category === f ? 'white' : '#4b5563' }}
-            >
-              {f}
-            </View>
-          ))}
-          </View>
-        </ScrollView>
-      </View>
-
-      {/* Grid */}
       <View className="px-4">
-         {loading ? <LoadingSpinner /> : (
-           <View className="flex flex-wrap justify-between">
-             {hairstyles.map(style => (
-               <View key={style.id} onClick={() => goDetail(style)} className="bg-white rounded-xl overflow-hidden shadow-sm mb-2" style={{ width: '31%' }}>
-                 <Image src={style.imageUrl} className="w-full h-24 object-cover" mode="aspectFill" style={{ width: '100%', height: '100px' }} />
-                 <View className="p-2">
-                    <View className="flex items-center mb-1">
-                       <Text className="text-xs text-orange-400">⚡ {style.heat}</Text>
-                    </View>
-                    <Text className="font-bold text-xs block truncate">{style.name}</Text>
-                 </View>
-               </View>
-             ))}
-           </View>
-         )}
+        {loading && (
+          <View className="py-10">
+            <LoadingSpinner />
+          </View>
+        )}
+
+        {!loading && error && (
+          <View className="text-center text-sm text-red-500 bg-red-50 py-3 rounded-lg">
+            加载失败，请稍后重试
+          </View>
+        )}
+
+        {!loading && !error && <HairstyleGrid hairstyles={hairstyles} onSelect={goDetail} />}
       </View>
     </View>
-  );
-};
+  )
+}
 
-export default Home;
+interface HeroBannerProps {
+  subtitle: string
+  onTryOn: () => void
+}
+
+/** Hero CTA that introduces the try-on capability. */
+const HeroBanner: React.FC<HeroBannerProps> = ({ onTryOn, subtitle }) => (
+  <View className="relative h-60 bg-gradient-to-br from-orange-500 to-pink-500 p-6 pt-12 rounded-b-3xl shadow-lg" style={{ background: heroGradient }}>
+    <View className="text-center mt-8">
+      <Text className="text-2xl font-bold text-white block mb-1">AI 智能匹配发型</Text>
+      <Text className="text-white text-sm block mb-6 opacity-80">{subtitle}</Text>
+      <View
+        onClick={onTryOn}
+        className="bg-white text-pink-500 px-8 py-3 rounded-full font-bold shadow-md inline-block"
+        style={{ backgroundColor: 'white', color: '#FF3D81', padding: '12px 32px', borderRadius: '999px', display: 'inline-block' }}
+      >
+        立即试戴
+      </View>
+    </View>
+  </View>
+)
+
+interface FilterPanelProps {
+  gender: Gender
+  category: (typeof HOME_FILTERS)['categories'][number]
+  onGenderChange: (g: Gender) => void
+  onCategoryChange: (c: (typeof HOME_FILTERS)['categories'][number]) => void
+  onRefresh: () => void
+}
+
+const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderChange, onCategoryChange, onRefresh }) => (
+  <View className="bg-white -mt-8 mx-4 rounded-xl p-3 shadow-sm mb-4 relative z-10">
+    <View className="flex mb-2 bg-gray-100 rounded p-1">
+      {HOME_FILTERS.genders.map(g => (
+        <View
+          key={g}
+          onClick={() => onGenderChange(g)}
+          className={`flex-1 text-center py-1 ${gender === g ? 'bg-white text-pink-500 shadow' : 'text-gray-500'}`}
+        >
+          {g}
+        </View>
+      ))}
+    </View>
+    <ScrollView scrollX className="whitespace-nowrap">
+      <View className="flex flex-row">
+        {HOME_FILTERS.categories.map(f => (
+          <View
+            key={f}
+            onClick={() => onCategoryChange(f)}
+            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block ${category === f ? 'bg-pink-500 text-white' : 'bg-gray-100 text-gray-600'}`}
+            style={{ backgroundColor: category === f ? '#FF3D81' : '#f3f4f6', color: category === f ? 'white' : '#4b5563' }}
+          >
+            {f}
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+    <View className="text-right text-xs text-gray-400 mt-1" onClick={onRefresh}>
+      刷新推荐
+    </View>
+  </View>
+)
+
+interface HairstyleGridProps {
+  hairstyles: Hairstyle[]
+  onSelect: (style: Hairstyle) => void
+}
+
+const HairstyleGrid: React.FC<HairstyleGridProps> = ({ hairstyles, onSelect }) => (
+  <View className="flex flex-wrap justify-between">
+    {hairstyles.map(style => (
+      <View key={style.id} onClick={() => onSelect(style)} className="bg-white rounded-xl overflow-hidden shadow-sm mb-2" style={{ width: '31%' }}>
+        <Image src={style.imageUrl} className="w-full h-24 object-cover" mode="aspectFill" style={{ width: '100%', height: '100px' }} />
+        <View className="p-2">
+          <View className="flex items-center mb-1">
+            <Text className="text-xs text-orange-400">⚡ {style.heat}</Text>
+          </View>
+          <Text className="font-bold text-xs block truncate">{style.name}</Text>
+        </View>
+      </View>
+    ))}
+  </View>
+)
+
+export default Home
