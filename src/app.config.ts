@@ -28,26 +28,34 @@ export default {
     navigationStyle: 'custom'
   },
   tabBar: {
-    color: '#858585',
-    selectedColor: '#FF3D81',
-    backgroundColor: '#fff',
-    borderStyle: 'black',
+    color: '#8e8fa8',
+    selectedColor: '#9F8BFF',
+    backgroundColor: '#f6f3ff',
+    borderStyle: 'white',
     list: [
       {
         pagePath: 'pages/home/index',
         text: '发型',
+        iconPath: 'assets/tabbar/home.svg',
+        selectedIconPath: 'assets/tabbar/home-active.svg',
       },
       {
         pagePath: 'pages/square/index',
         text: '广场',
+        iconPath: 'assets/tabbar/square.svg',
+        selectedIconPath: 'assets/tabbar/square-active.svg',
       },
       {
         pagePath: 'pages/message/index',
         text: '消息',
+        iconPath: 'assets/tabbar/message.svg',
+        selectedIconPath: 'assets/tabbar/message-active.svg',
       },
       {
         pagePath: 'pages/profile/index',
         text: '我的',
+        iconPath: 'assets/tabbar/profile.svg',
+        selectedIconPath: 'assets/tabbar/profile-active.svg',
       }
     ]
   }

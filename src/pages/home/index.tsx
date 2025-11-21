@@ -84,9 +84,9 @@ const HERO_SLIDES = [
 
 /** Hero CTA as a top-fill carousel. */
 const HeroBanner: React.FC<HeroBannerProps> = ({ onTryOn, subtitle }) => (
-  <View className="px-4 pt-5">
+  <View className="pt-2">
     <Swiper
-      className="w-full h-72"
+      className="w-full h-60"
       indicatorDots
       circular
       autoplay
@@ -95,7 +95,10 @@ const HeroBanner: React.FC<HeroBannerProps> = ({ onTryOn, subtitle }) => (
     >
       {HERO_SLIDES.map((slide, idx) => (
         <SwiperItem key={idx}>
-          <View className="relative h-full rounded-3xl overflow-hidden shadow-lg" style={{ background: slide.gradient }}>
+          <View
+            className="relative h-full rounded-3xl overflow-hidden shadow-lg mx-0"
+            style={{ background: slide.gradient }}
+          >
             <View
               className="absolute inset-0"
               style={{
@@ -135,18 +138,28 @@ interface FilterPanelProps {
 
 const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderChange, onCategoryChange, onRefresh }) => (
   <View className="px-4 mt-4">
-    <View className="bg-white/90 rounded-2xl shadow-sm px-2 py-2 flex items-center gap-2">
+    <View className="bg-gradient-to-r from-[#eef4ff] via-[#f8eeff] to-[#e9f6ff] rounded-2xl shadow-[0_12px_32px_rgba(124,111,247,0.12)] border border-white/70 px-2 py-2 flex items-center gap-2 backdrop-blur">
       {GENDER_OPTIONS.map(opt => {
         const active = gender === opt.value
         return (
           <View
             key={opt.value}
             onClick={() => onGenderChange(opt.value)}
-            className={`flex-1 text-center text-sm font-semibold py-2 rounded-full transition-all ${
+            className={`flex-1 text-center text-sm font-semibold py-2 rounded-full transition-all border ${
               active
-                ? 'bg-gradient-to-r from-[#d7e6ff] via-[#f2e5ff] to-[#ffe6fa] text-[#5a4fdc] shadow-md'
-                : 'bg-gray-100/70 text-gray-600'
+                ? 'text-[#5032f5] shadow-[0_10px_30px_rgba(124,111,247,0.25)]'
+                : 'text-[#6b6f8f]'
             }`}
+            style={{
+              background: active
+                ? 'linear-gradient(120deg, #d7e6ff, #f2e5ff 55%, #ffe6fa)'
+                : 'linear-gradient(#ffffffcc, #ffffffcc)',
+              border: active
+                ? '1px solid rgba(124, 111, 247, 0.28)'
+                : '1px solid rgba(228, 231, 245, 0.9)',
+              boxShadow: active ? '0 12px 30px rgba(124, 111, 247, 0.2)' : 'none',
+              color: active ? '#4d3bf1' : '#6b6f8f',
+            }}
           >
             {opt.label}
           </View>
@@ -162,11 +175,19 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderCha
             <View
               key={f}
               onClick={() => onCategoryChange(f)}
-              className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all ${
                 active
-                  ? 'bg-gradient-to-r from-[#7AC8FF] via-[#9F8BFF] to-[#FF7DEB] text-white border-transparent shadow-sm'
-                  : 'bg-white text-gray-700 border-gray-200'
+                  ? 'text-white shadow-[0_10px_26px_rgba(146,119,255,0.35)]'
+                  : 'text-[#6b6f8f]'
               }`}
+              style={{
+                background: active
+                  ? 'linear-gradient(120deg, #7AC8FF, #9F8BFF 55%, #FF7DEB)'
+                  : 'linear-gradient(#ffffff, #ffffff), linear-gradient(120deg, #7AC8FF, #9F8BFF 55%, #FF7DEB)',
+                backgroundOrigin: 'border-box',
+                backgroundClip: active ? 'border-box' : 'padding-box, border-box',
+                border: active ? '1px solid transparent' : '1px solid transparent',
+              }}
             >
               {f}
             </View>
