@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View as TaroView, Text as TaroText, Image as TaroImage, Button as TaroButton } from '@tarojs/components';
 import Taro, { useRouter } from '@tarojs/taro';
 import { TopNav, ButtonPrimary } from '@/components/ui';
-import styles from './index.module.scss';
 
 // Cast Taro components to any to avoid Vue/React type conflicts
 const View = TaroView as any;
@@ -41,7 +40,7 @@ const TryOnEntry = () => {
   }
 
   return (
-    <View className={styles.page}>
+    <View className="flex flex-col h-screen bg-gray-50">
       <TopNav title="AI 智能试戴" onBack={() => Taro.navigateBack()} />
       
       <View className="p-4 flex flex-col items-center">

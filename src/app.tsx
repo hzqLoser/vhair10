@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react'
 import { useLaunch } from '@tarojs/taro'
-import './app.scss'
+import './global.css'
 
 /**
  * Global app shell required by Taro.

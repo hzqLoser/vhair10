@@ -6,7 +6,6 @@ import { HOME_CATEGORY_MAP, HOME_FILTERS } from '@/constants/home'
 import { useAsyncRequest } from '@/hooks/useAsyncRequest'
 import { LoadingSpinner } from '@/components/ui'
 import { Image, ScrollView, Text, View } from '@/utils/taro'
-import styles from './index.module.scss'
 
 /**
  * Feature entry for the home tab. The page is intentionally split into
@@ -34,7 +33,7 @@ const Home = () => {
   const goTryOn = () => Taro.navigateTo({ url: '/pages/tryOnEntry/index' })
 
   return (
-    <View className={styles.homePage}>
+    <View className="flex flex-col min-h-screen bg-gray-100 pb-5">
       <HeroBanner onTryOn={goTryOn} subtitle={subtitle} />
       <FilterPanel
         gender={gender}
@@ -44,7 +43,7 @@ const Home = () => {
         onRefresh={refresh}
       />
 
-      <View className={styles.gridSection}>
+      <View className="px-4">
         {loading && (
           <View className="py-10">
             <LoadingSpinner />
@@ -70,11 +69,14 @@ interface HeroBannerProps {
 
 /** Hero CTA that introduces the try-on capability. */
 const HeroBanner: React.FC<HeroBannerProps> = ({ onTryOn, subtitle }) => (
-  <View className={styles.heroBanner}>
-    <View className={styles.heroContent}>
-      <Text className={styles.heroTitle}>AI 智能匹配发型</Text>
-      <Text className={styles.heroSubtitle}>{subtitle}</Text>
-      <View onClick={onTryOn} className={styles.heroButton}>
+  <View
+    className="relative h-60 p-6 pt-12 rounded-b-3xl shadow-lg"
+    style={{ background: 'linear-gradient(to bottom right, #ff8a00, #ff3d81)' }}
+  >
+    <View className="text-center mt-8">
+      <Text className="text-2xl font-bold text-white block mb-1">AI 智能匹配发型</Text>
+      <Text className="text-white text-sm block mb-6 opacity-80">{subtitle}</Text>
+      <View onClick={onTryOn} className="inline-block bg-white text-pink-500 px-8 py-3 rounded-full font-bold shadow-md" style={{ color: '#ff3d81' }}>
         立即试戴
       </View>
     </View>
@@ -90,32 +92,34 @@ interface FilterPanelProps {
 }
 
 const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderChange, onCategoryChange, onRefresh }) => (
-  <View className={styles.filterCard}>
-    <View className={styles.genderTabs}>
+  <View className="bg-white -mt-8 mx-4 rounded-xl p-3 shadow-sm mb-4 relative z-10">
+    <View className="flex mb-2 bg-gray-100 rounded p-1">
       {HOME_FILTERS.genders.map(g => (
         <View
           key={g}
           onClick={() => onGenderChange(g)}
-          className={`${styles.genderTab} ${gender === g ? styles.genderTabActive : ''}`}
+          className={`flex-1 text-center py-1 text-gray-500 ${gender === g ? 'bg-white text-pink-500 shadow' : ''}`}
         >
           {g}
         </View>
       ))}
     </View>
     <ScrollView scrollX>
-      <View className={styles.categoryRow}>
+      <View className="flex flex-row whitespace-nowrap">
         {HOME_FILTERS.categories.map(f => (
           <View
             key={f}
             onClick={() => onCategoryChange(f)}
-            className={`${styles.categoryPill} ${category === f ? styles.categoryPillActive : ''}`}
+            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600 ${
+              category === f ? 'bg-pink-500 text-white' : ''
+            }`}
           >
             {f}
           </View>
         ))}
       </View>
     </ScrollView>
-    <View className={styles.refreshLink} onClick={onRefresh}>
+    <View className="text-right text-xs text-gray-400 mt-1" onClick={onRefresh}>
       刷新推荐
     </View>
   </View>
@@ -127,15 +131,15 @@ interface HairstyleGridProps {
 }
 
 const HairstyleGrid: React.FC<HairstyleGridProps> = ({ hairstyles, onSelect }) => (
-  <View className={styles.gridList}>
+  <View className="grid grid-cols-2 gap-3 pt-2">
     {hairstyles.map(style => (
-      <View key={style.id} onClick={() => onSelect(style)} className={styles.card}>
-        <Image src={style.imageUrl} className={styles.cardImage} mode="aspectFill" />
-        <View className={styles.cardBody}>
-          <View className={styles.cardHeat}>
+      <View key={style.id} onClick={() => onSelect(style)} className="bg-white rounded-xl overflow-hidden shadow-sm">
+        <Image src={style.imageUrl} className="w-full h-36 object-cover" mode="aspectFill" />
+        <View className="p-2">
+          <View className="flex items-center mb-1 text-xs text-orange-400">
             <Text className="text-xs text-orange-400">⚡ {style.heat}</Text>
           </View>
-          <Text className={styles.cardName}>{style.name}</Text>
+          <Text className="font-bold text-xs block truncate">{style.name}</Text>
         </View>
       </View>
     ))}

@@ -3,7 +3,6 @@ import { View as TaroView, Text as TaroText, Image as TaroImage } from '@tarojs/
 import Taro, { useRouter } from '@tarojs/taro';
 import { LoadingSpinner } from '@/components/ui';
 import { api } from '@/services/api';
-import styles from './index.module.scss';
 
 // Cast Taro components to any to avoid Vue/React type conflicts
 const View = TaroView as any;
@@ -32,7 +31,7 @@ const TryOnLoading = () => {
   }, []);
 
   return (
-    <View className={styles.page}>
+    <View className="h-screen bg-black relative flex items-center justify-center">
        <Image src={userImage} className="absolute inset-0 w-full h-full opacity-30" mode="aspectFill" />
        <View className="relative z-10 bg-white/10 p-8 rounded-2xl text-center">
           <Text className="text-white text-xl font-bold mb-6 block">正在生成...</Text>

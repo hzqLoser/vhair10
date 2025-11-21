@@ -4,7 +4,6 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { LoadingSpinner } from '../../components/ui';
 import { api } from '../../services/api';
 import { User } from '../../types';
-import styles from './index.module.scss';
 
 const View = TaroView as any;
 const Text = TaroText as any;
@@ -22,7 +21,7 @@ const Profile = () => {
   if (!user) return <LoadingSpinner color="text-gray-300" />;
 
   return (
-    <View className={styles.page}>
+    <View className="flex flex-col min-h-screen bg-gray-50 pb-5">
       <View className="bg-white p-6 pb-8 rounded-b-3xl shadow-sm mb-4">
          <View className="flex flex-row items-center gap-4 mb-6">
             <Image src={user.avatar} className="w-16 h-16 rounded-full border-2 border-pink-100" mode="aspectFill" />
