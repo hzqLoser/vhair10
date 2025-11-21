@@ -4,7 +4,7 @@ import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss-webpack-plugin'
 
 export default defineConfig(async (merge, { command, mode }) => {
   const apiKey = process.env.API_KEY || '';
-  
+
   const baseConfig: UserConfigExport = {
     projectName: 'hairmatch-ai-taro',
     date: '2023-10-27',
@@ -25,8 +25,6 @@ export default defineConfig(async (merge, { command, mode }) => {
     },
     copy: {
       patterns: [
-        // Ensure the root HTML template is available to the dev server
-        { from: 'index.html', to: 'dist/index.html' }
       ],
       options: {},
     },
@@ -65,7 +63,7 @@ export default defineConfig(async (merge, { command, mode }) => {
     },
     h5: {
       // Explicitly use the project root HTML template so dev server serves the Taro app
-      template: path.resolve(__dirname, '..', 'index.html'),
+      template: path.resolve(__dirname, '..', 'src/index.html'),
       publicPath: '/',
       staticDirectory: 'static',
       postcss: {

@@ -40,7 +40,6 @@ const Home = () => {
         category={category}
         onGenderChange={setGender}
         onCategoryChange={setCategory}
-        onRefresh={refresh}
       />
 
       <View className="px-4">
@@ -88,10 +87,9 @@ interface FilterPanelProps {
   category: (typeof HOME_FILTERS)['categories'][number]
   onGenderChange: (g: Gender) => void
   onCategoryChange: (c: (typeof HOME_FILTERS)['categories'][number]) => void
-  onRefresh: () => void
 }
 
-const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderChange, onCategoryChange, onRefresh }) => (
+const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderChange, onCategoryChange }) => (
   <View className="bg-white -mt-8 mx-4 rounded-xl p-3 shadow-sm mb-4 relative z-10">
     <View className="flex mb-2 bg-gray-100 rounded p-1">
       {HOME_FILTERS.genders.map(g => (
@@ -110,18 +108,14 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderCha
           <View
             key={f}
             onClick={() => onCategoryChange(f)}
-            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600 ${
-              category === f ? 'bg-pink-500 text-white' : ''
-            }`}
+            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600 ${category === f ? 'bg-pink-500 text-white' : ''
+              }`}
           >
             {f}
           </View>
         ))}
       </View>
     </ScrollView>
-    <View className="text-right text-xs text-gray-400 mt-1" onClick={onRefresh}>
-      刷新推荐
-    </View>
   </View>
 )
 
@@ -131,7 +125,7 @@ interface HairstyleGridProps {
 }
 
 const HairstyleGrid: React.FC<HairstyleGridProps> = ({ hairstyles, onSelect }) => (
-  <View className="grid grid-cols-2 gap-3 pt-2">
+  <View className="grid grid-cols-3 gap-2 pt-2">
     {hairstyles.map(style => (
       <View key={style.id} onClick={() => onSelect(style)} className="bg-white rounded-xl overflow-hidden shadow-sm">
         <Image src={style.imageUrl} className="w-full h-36 object-cover" mode="aspectFill" />
