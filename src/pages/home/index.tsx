@@ -110,9 +110,8 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ gender, category, onGenderCha
           <View
             key={f}
             onClick={() => onCategoryChange(f)}
-            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600 ${
-              category === f ? 'bg-pink-500 text-white' : ''
-            }`}
+            className={`px-3 py-1 rounded-full text-xs mr-2 inline-block bg-gray-100 text-gray-600 ${category === f ? 'bg-pink-500 text-white' : ''
+              }`}
           >
             {f}
           </View>
@@ -131,15 +130,14 @@ interface HairstyleGridProps {
 }
 
 const HairstyleGrid: React.FC<HairstyleGridProps> = ({ hairstyles, onSelect }) => (
-  <View className="grid grid-cols-2 gap-3 pt-2">
+  <View className="grid grid-cols-3 gap-2 pt-2">
     {hairstyles.map(style => (
       <View key={style.id} onClick={() => onSelect(style)} className="bg-white rounded-xl overflow-hidden shadow-sm">
-        <Image src={style.imageUrl} className="w-full h-36 object-cover" mode="aspectFill" />
-        <View className="p-2">
-          <View className="flex items-center mb-1 text-xs text-orange-400">
-            <Text className="text-xs text-orange-400">⚡ {style.heat}</Text>
-          </View>
-          <Text className="font-bold text-xs block truncate">{style.name}</Text>
+        <Image src={style.imageUrl} className="w-full h-32 object-cover" mode="aspectFill" />
+        <View className="px-2 py-0.5 h-6 flex items-center justify-center text-center">
+          <Text className="block font-semibold text-xs leading-4 truncate text-center">
+            {style.name}
+          </Text>
         </View>
       </View>
     ))}
