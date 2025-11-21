@@ -15,10 +15,17 @@ export const ButtonPrimary: React.FC<{ children: React.ReactNode; onClick?: any;
   <Button
     onClick={onClick}
     disabled={disabled}
-    className={`bg-gradient-to-r from-[#7AC8FF] via-[#9F8BFF] to-[#FF7DEB] text-white font-semibold py-3 px-6 rounded-full shadow-lg w-full flex justify-center items-center ${
-      disabled ? 'opacity-50' : ''
+    className={`text-white font-semibold py-3 px-6 rounded-full shadow-lg w-full flex justify-center items-center transition-all ${
+      disabled ? 'opacity-50' : 'shadow-[0_10px_30px_rgba(124,111,247,0.4)]'
     } ${className}`}
-    style={{ background: 'linear-gradient(120deg, #7AC8FF, #9F8BFF 60%, #FF7DEB)', color: 'white', borderRadius: '999px', border: 'none' }}
+    style={{
+      background: 'linear-gradient(130deg, #7AC8FF 0%, #9F8BFF 55%, #FF7DEB 100%)',
+      color: 'white',
+      borderRadius: '999px',
+      border: 'none',
+      boxShadow: disabled ? 'none' : '0 15px 40px rgba(125, 108, 247, 0.35)',
+      filter: disabled ? undefined : 'drop-shadow(0 0 18px rgba(146,119,255,0.45))',
+    }}
   >
     {children}
   </Button>

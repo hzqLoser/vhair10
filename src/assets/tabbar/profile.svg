@@ -1,0 +1,10 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="profileStroke" x1="12" y1="10" x2="36" y2="38" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BFC7D7" />
+      <stop offset="1" stop-color="#9AA3C2" />
+    </linearGradient>
+  </defs>
+  <circle cx="24" cy="19" r="7" stroke="url(#profileStroke)" stroke-width="2.6" />
+  <path d="M13 35.5c2.2-4 6.4-6.5 11-6.5s8.8 2.5 11 6.5" stroke="url(#profileStroke)" stroke-width="2.6" stroke-linecap="round" />
+</svg>
