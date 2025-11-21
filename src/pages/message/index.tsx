@@ -4,6 +4,7 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { SegmentedControl } from '../../components/ui';
 import { api } from '../../services/api';
 import { ChatSession } from '../../types';
+import styles from './index.module.scss';
 
 const View = TaroView as any;
 const Text = TaroText as any;
@@ -25,7 +26,7 @@ const MessageList = () => {
   };
 
   return (
-    <View className="flex flex-col h-full bg-gray-50 min-h-screen">
+    <View className={styles.page}>
       <View className="h-11 flex items-center justify-center bg-white sticky top-0 z-20">
          <Text className="font-bold text-lg">消息</Text>
       </View>

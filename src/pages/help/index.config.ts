@@ -1,0 +1,5 @@
+export default definePageConfig({
+  navigationBarTitleText: '帮助与反馈',
+  navigationStyle: 'custom',
+  backgroundColor: '#f7f7f7',
+});

@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ensure the app fills the viewport and uses a neutral background */
+html, body, #app, .taro_router, .taro_router .taro_page {
+  min-height: 100vh;
+}
+
+body {
+  background-color: #f3f4f6;
+}

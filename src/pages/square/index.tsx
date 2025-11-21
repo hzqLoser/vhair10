@@ -4,6 +4,7 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { SegmentedControl, ButtonPrimary, TagChip, LoadingSpinner } from '../../components/ui';
 import { api } from '../../services/api';
 import { Topic, UserShow, Store } from '../../types';
+import styles from './index.module.scss';
 
 const View = TaroView as any;
 const Text = TaroText as any;
@@ -62,7 +63,7 @@ const Square = () => {
   };
 
   return (
-    <View className="flex flex-col h-full bg-gray-50 min-h-screen">
+    <View className={styles.page}>
       <View className="h-11 flex flex-row items-center justify-between px-4 bg-white sticky top-0 z-20">
          <Text className="text-sm font-bold text-gray-800">杭州 ▾</Text>
          <Text className="text-lg font-bold">广场</Text>

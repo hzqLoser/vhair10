@@ -1,5 +1,10 @@
 import { Barber, ChatSession, Gender, Hairstyle, Store, Topic, User, UserShow, TryOnHistoryItem } from "@/types";
 
+/**
+ * Central mock dataset used across the app. Keeping everything in one place
+ * makes it easy to swap to real APIs later while preserving the type shapes
+ * relied upon by pages and services.
+ */
 export const APP_NAME = "HairMatch AI";
 
 export const MOCK_USER: User = {

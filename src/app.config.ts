@@ -1,5 +1,7 @@
 
 export default {
+  // 确保 H5 默认跳转到首页
+  entryPagePath: 'pages/home/index',
   pages: [
     'pages/home/index',
     'pages/square/index',
@@ -22,7 +24,8 @@ export default {
     backgroundTextStyle: 'light',
     navigationBarBackgroundColor: '#fff',
     navigationBarTitleText: 'HairMatch AI',
-    navigationBarTextStyle: 'black'
+    navigationBarTextStyle: 'black',
+    navigationStyle: 'custom'
   },
   tabBar: {
     color: '#858585',

@@ -78,6 +78,39 @@ export const HAIRSTYLES: Hairstyle[] = [
     heat: 1100,
     isCollected: false,
     description: 'A bold short style that highlights facial features.'
+  },
+  {
+    id: 'h7',
+    name: 'Layered Crop',
+    imageUrl: 'https://picsum.photos/seed/hair7/400/500',
+    tags: ['Clean', 'Office'],
+    gender: Gender.Male,
+    category: 'straight',
+    heat: 720,
+    isCollected: false,
+    description: 'Short layered crop with a natural parting that suits most face shapes and daily work scenes.'
+  },
+  {
+    id: 'h8',
+    name: 'Textured Fringe',
+    imageUrl: 'https://picsum.photos/seed/hair8/400/500',
+    tags: ['Trendy', 'Volume'],
+    gender: Gender.Male,
+    category: 'curly',
+    heat: 680,
+    isCollected: true,
+    description: 'Softly permed fringe with light texture to add height and frame the forehead without looking too heavy.'
+  },
+  {
+    id: 'h9',
+    name: 'Natural Perm',
+    imageUrl: 'https://picsum.photos/seed/hair9/400/500',
+    tags: ['Perm', 'Low Maintenance'],
+    gender: Gender.Male,
+    category: 'color',
+    heat: 540,
+    isCollected: false,
+    description: 'Loose curls with subtle brown dye to brighten the complexion and keep styling effortless.'
   }
 ];
 

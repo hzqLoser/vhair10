@@ -23,7 +23,10 @@ export default defineConfig(async (merge, { command, mode }) => {
       'process.env.API_KEY': JSON.stringify(apiKey)
     },
     copy: {
-      patterns: [],
+      patterns: [
+        // Ensure the root HTML template is available to the dev server
+        { from: 'index.html', to: 'dist/index.html' }
+      ],
       options: {},
     },
     framework: 'react',
@@ -44,7 +47,7 @@ export default defineConfig(async (merge, { command, mode }) => {
           },
         },
         cssModules: {
-          enable: false,
+          enable: true,
           config: {
             namingPattern: 'module',
             generateScopedName: '[name]__[local]___[hash:base64:5]',
@@ -53,6 +56,8 @@ export default defineConfig(async (merge, { command, mode }) => {
       },
     },
     h5: {
+      // Explicitly use the project root HTML template so dev server serves the Taro app
+      template: path.resolve(__dirname, '..', 'index.html'),
       publicPath: '/',
       staticDirectory: 'static',
       postcss: {
@@ -61,7 +66,7 @@ export default defineConfig(async (merge, { command, mode }) => {
           config: {},
         },
         cssModules: {
-          enable: false,
+          enable: true,
           config: {
             namingPattern: 'module',
             generateScopedName: '[name]__[local]___[hash:base64:5]',

@@ -5,6 +5,7 @@ import Taro, { useDidShow } from '@tarojs/taro';
 import { TopNav, ButtonSecondary } from '../../components/ui';
 import { api } from '../../services/api';
 import { Hairstyle } from '../../types';
+import styles from './index.module.scss';
 
 const View = TaroView as any;
 const Text = TaroText as any;
@@ -22,7 +23,7 @@ const SavedHairstyles = () => {
   };
 
   return (
-    <View className="flex flex-col h-full bg-gray-50 min-h-screen">
+    <View className={styles.page}>
        <TopNav title="收藏的发型" onBack={() => Taro.navigateBack()} />
        <View className="p-4 flex flex-wrap justify-between">
           {list.length === 0 ? (
