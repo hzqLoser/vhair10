@@ -7,5 +7,5 @@ html, body, #app, .taro_router, .taro_router .taro_page {
 }
 
 body {
-  background-color: #f3f4f6;
+  background: linear-gradient(180deg, #eef3ff 0%, #fbf4ff 45%, #f0f7ff 100%);
 }

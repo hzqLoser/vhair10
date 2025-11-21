@@ -15,10 +15,10 @@ export const ButtonPrimary: React.FC<{ children: React.ReactNode; onClick?: any;
   <Button
     onClick={onClick}
     disabled={disabled}
-    className={`bg-gradient-to-r from-[#FF8A00] to-[#FF3D81] text-white font-semibold py-3 px-6 rounded-full shadow-lg w-full flex justify-center items-center ${
+    className={`bg-gradient-to-r from-[#7AC8FF] via-[#9F8BFF] to-[#FF7DEB] text-white font-semibold py-3 px-6 rounded-full shadow-lg w-full flex justify-center items-center ${
       disabled ? 'opacity-50' : ''
     } ${className}`}
-    style={{ background: 'linear-gradient(to right, #FF8A00, #FF3D81)', color: 'white', borderRadius: '999px', border: 'none' }}
+    style={{ background: 'linear-gradient(120deg, #7AC8FF, #9F8BFF 60%, #FF7DEB)', color: 'white', borderRadius: '999px', border: 'none' }}
   >
     {children}
   </Button>
@@ -27,8 +27,8 @@ export const ButtonPrimary: React.FC<{ children: React.ReactNode; onClick?: any;
 export const ButtonSecondary: React.FC<{ children: React.ReactNode; onClick?: any; className?: string }> = ({ children, onClick, className = '' }) => (
   <Button
     onClick={onClick}
-    className={`bg-white border border-[#FF3D81] text-[#FF3D81] font-medium py-2 px-4 rounded-full ${className}`}
-    style={{ background: 'white', border: '1px solid #FF3D81', color: '#FF3D81', borderRadius: '999px' }}
+    className={`bg-white border border-[#9F8BFF] text-[#7C6FF7] font-medium py-2 px-4 rounded-full ${className}`}
+    style={{ background: 'white', border: '1px solid #9F8BFF', color: '#7C6FF7', borderRadius: '999px' }}
   >
     {children}
   </Button>
@@ -37,14 +37,14 @@ export const ButtonSecondary: React.FC<{ children: React.ReactNode; onClick?: an
 export const ButtonGhost: React.FC<{ children: React.ReactNode; onClick?: any; className?: string }> = ({ children, onClick, className = '' }) => (
   <Button
     onClick={onClick}
-    className={`bg-gray-100 text-gray-600 font-medium py-2 px-4 rounded-full ${className}`}
-    style={{ background: '#f3f4f6', color: '#4b5563', borderRadius: '999px', border: 'none' }}
+    className={`bg-[#f3f5ff] text-[#5b6b95] font-medium py-2 px-4 rounded-full ${className}`}
+    style={{ background: '#f3f5ff', color: '#5b6b95', borderRadius: '999px', border: 'none' }}
   >
     {children}
   </Button>
 )
 
-export const LoadingSpinner: React.FC<{ size?: number; color?: string }> = ({ size = 40, color = '#FF3D81' }) => (
+export const LoadingSpinner: React.FC<{ size?: number; color?: string }> = ({ size = 40, color = '#7C6FF7' }) => (
   <View className="flex items-center justify-center">
     <View
       style={{ width: size, height: size, borderRadius: '50%', border: `4px solid #f3f3f3`, borderTop: `4px solid ${color}` }}
@@ -56,7 +56,7 @@ export const LoadingSpinner: React.FC<{ size?: number; color?: string }> = ({ si
 export const TagChip: React.FC<{ label: string; color?: string }> = ({ label, color = 'bg-pink-50 text-pink-600' }) => (
   <View
     className={`px-2 py-0.5 rounded-md text-xs font-medium mr-1.5 mb-1 inline-block ${color}`}
-    style={{ backgroundColor: '#fdf2f8', color: '#db2777', padding: '2px 6px', borderRadius: '4px', display: 'inline-block' }}
+    style={{ backgroundColor: '#eef2ff', color: '#6b7bd8', padding: '2px 6px', borderRadius: '4px', display: 'inline-block' }}
   >
     <Text>{label}</Text>
   </View>
@@ -96,11 +96,11 @@ export const SegmentedControl: React.FC<{ options: string[]; selected: string; o
  * clickable back affordance.
  */
 export const TopNav: React.FC<{ title?: string; onBack?: () => void }> = ({ title, onBack }) => (
-  <View className="h-11 flex flex-row items-center justify-between px-4 bg-white sticky top-0 z-20 border-b border-gray-50">
+  <View className="h-11 flex flex-row items-center justify-between px-4 bg-white/80 backdrop-blur sticky top-0 z-20 border-b border-gray-100">
     <View className="w-10" onClick={onBack}>
-      {onBack && <Text>{'<'}</Text>}
+      {onBack && <Text className="text-lg text-gray-700">{'<'}</Text>}
     </View>
-    <Text className="font-bold text-lg text-gray-800">{title}</Text>
+    <Text className="font-semibold text-base text-gray-900">{title}</Text>
     <View className="w-10"></View>
   </View>
 )
