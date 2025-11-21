@@ -1,5 +1,6 @@
 import { defineConfig, type UserConfigExport } from '@tarojs/cli'
 import path from 'path'
+import { UnifiedWebpackPluginV5 } from 'weapp-tailwindcss-webpack-plugin'
 
 export default defineConfig(async (merge, { command, mode }) => {
   const apiKey = process.env.API_KEY || '';
@@ -36,6 +37,13 @@ export default defineConfig(async (merge, { command, mode }) => {
     },
     mini: {
       postcss: {
+        tailwindcss: {
+          enable: true,
+        },
+        autoprefixer: {
+          enable: true,
+          config: {},
+        },
         pxtransform: {
           enable: true,
           config: {},
@@ -46,13 +54,13 @@ export default defineConfig(async (merge, { command, mode }) => {
             limit: 1024,
           },
         },
-        cssModules: {
-          enable: true,
-          config: {
-            namingPattern: 'module',
-            generateScopedName: '[name]__[local]___[hash:base64:5]',
+      },
+      webpackChain(chain) {
+        chain.plugin('weapp-tailwindcss-webpack-plugin').use(UnifiedWebpackPluginV5, [
+          {
+            appType: 'taro',
           },
-        },
+        ])
       },
     },
     h5: {
@@ -61,17 +69,21 @@ export default defineConfig(async (merge, { command, mode }) => {
       publicPath: '/',
       staticDirectory: 'static',
       postcss: {
+        tailwindcss: {
+          enable: true,
+        },
         autoprefixer: {
           enable: true,
           config: {},
         },
-        cssModules: {
-          enable: true,
-          config: {
-            namingPattern: 'module',
-            generateScopedName: '[name]__[local]___[hash:base64:5]',
+      },
+      webpackChain(chain) {
+        chain.plugin('weapp-tailwindcss-webpack-plugin').use(UnifiedWebpackPluginV5, [
+          {
+            appType: 'taro',
+            disableWeappCheck: true,
           },
-        },
+        ])
       },
     },
   }

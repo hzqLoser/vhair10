@@ -35,7 +35,7 @@ HairMatch AI 是一款面向年轻用户的 AI 虚拟换发 App。
 
 ## 2. 前后端接口协议 (API Protocols)
 
-本项目前端采用 React 开发，所有数据交互已封装在 `services/api.ts` 中。后端建议采用 Go 语言实现。
+本项目前端采用 React + Taro 开发，所有数据交互已封装在 `src/services/api.ts` 中。后端建议采用 Go 语言实现。
 
 以下是主要接口的定义与字段说明。
 

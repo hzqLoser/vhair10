@@ -54,11 +54,12 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.0",
     "@types/webpack-env": "^1.13.6",
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.20",
     "babel-preset-taro": "4.0.7",
-    "postcss": "^8.4.0",
+    "postcss": "^8.4.47",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.0.0",
+    "weapp-tailwindcss-webpack-plugin": "^4.2.5",
     "webpack": "^5.0.0"
   }
 }

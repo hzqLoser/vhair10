@@ -3,7 +3,6 @@ import { View as TaroView, Text as TaroText, Image as TaroImage, ScrollView } fr
 import Taro, { useRouter } from '@tarojs/taro';
 import { ButtonPrimary, TagChip, TopNav } from '../../components/ui';
 import { Hairstyle } from '../../types';
-import styles from './index.module.scss';
 
 const View = TaroView as any;
 const Text = TaroText as any;
@@ -23,7 +22,7 @@ const HairstyleDetail = () => {
   };
 
   return (
-    <View className={styles.page}>
+    <View className="flex flex-col min-h-screen bg-white relative">
       {/* 顶部透明导航，这里简单处理，实际可使用自定义导航栏组件 */}
       <View className="relative h-96">
         <Image src={data.imageUrl} className="w-full h-full" mode="aspectFill" />
